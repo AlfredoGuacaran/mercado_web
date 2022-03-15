@@ -47,18 +47,16 @@
         var myModal = document.getElementById('carritoModal')
         var myInput = document.getElementById('carritoInput')
 
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-        })
 
 
-        const agregarProducto = async (productoid) => {
+
+        const agregarProducto = async (productoId, nombre, precio) => {
 
             try {
                 const { data } = await axios.post(
                     `http://localhost:3000/agregar`,
                     {
-                        productoid
+                        productoId, nombre, precio
                     }
                 );
                 alert('Producto agregado con exito')
@@ -68,26 +66,17 @@
             }
         };
 
-
-
-
-
-
-
         $(".add-producto").click(function (event) {
-            const productoId = $(this).data('productoid');
-            agregarProducto(productoId)
+            const productoId = $(this).data('id');
+            const nombre = $(this).data('nombre');
+            const precio = $(this).data('precio');
+
+
+            agregarProducto(productoId, nombre, precio)
 
         });
 
     </script>
-
-
-
-
-
-
-
 
 </body>
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const app = express();
+const { agregarAlCarrito, getCarrito } = require('./db');
 
 app.use(express.static('static'));
 app.use(express.static('node_modules/bootstrap/dist'));
@@ -15,16 +16,15 @@ const productos = [
   { id: 6, nombre: 'Tomate', img: 'tomate.png', precio: 1800 },
 ];
 
-let carrito = [];
-
 nunjucks.configure('views', {
   express: app,
   autoescape: true,
   watch: true,
 });
 
-app.get('/', (req, res) => {
-  res.render('index.html', { productos, carrito });
+app.get('/', async (req, res) => {
+  const carrito = await getCarrito();
+  res.render('index.html', { productos: productos, carrito: carrito });
 });
 
 app.post('/agregar', async (req, res) => {
@@ -35,15 +35,9 @@ app.post('/agregar', async (req, res) => {
 
   req.on('end', async () => {
     try {
-      const { productoid } = data;
+      const { productoId, nombre, precio } = data;
 
-      const productInf = productos.filter(
-        producto => producto.id == productoid
-      )[0];
-
-      carrito.push(productInf);
-
-      console.log(carrito);
+      const post = await agregarAlCarrito(productoId, nombre, precio);
 
       res.status(200).send({ Mensaje: 'Exitoso' });
     } catch (error) {

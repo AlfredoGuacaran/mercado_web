@@ -1,13 +1,16 @@
 {% macro producto_card(producto) %}
 
-<div class="card" style="width: 16rem;">
+<div class="card m-2" style="width: 16rem;">
     <img src="/{{ producto.img }}" class="card-img-top" alt="...">
     <div class="card-body ">
         <h5 class="card-title text-center">{{ producto.nombre }}</h5>
-        <button href="#" class="btn btn-primary add-producto" data-productoId="{{ producto.id }}">Agregar</button>
-        <money>
-            <currency>$</currency> {{ producto.precio }}
-        </money>
+        <div class="d-flex justify-content-between align-items-center">
+            <button href="#" class="btn btn-primary add-producto" data-id="{{ producto.id }}"
+                data-nombre="{{ producto.nombre }}" data-precio="{{ producto.precio }}">Agregar</button>
+            <money class="fw-bold">
+                $ {{ producto.precio }}
+            </money>
+        </div>
     </div>
 </div>
 
