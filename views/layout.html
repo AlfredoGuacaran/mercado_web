@@ -16,17 +16,13 @@
 <body>
     <nav class="navbar navbar-light " style="background-color: #e3f2fd;">
         <div class="container-fluid d-flex justify-content-end ">
-            <a class="navbar-brand" href="#">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#carritoModal">
                 <img src="/carro.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                Carrito de compras
-            </a>
+                Carrito
+            </button>
+
         </div>
     </nav>
-
-
-
-
-
 
     <div class="container">
         {% block container %}
@@ -35,10 +31,63 @@
     </div>
 
 
+
+
     <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="/jquery.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
+    <script>
+        var myModal = document.getElementById('carritoModal')
+        var myInput = document.getElementById('carritoInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+
+
+        const agregarProducto = async (productoid) => {
+
+            try {
+                const { data } = await axios.post(
+                    `http://localhost:3000/agregar`,
+                    {
+                        productoid
+                    }
+                );
+                alert('Producto agregado con exito')
+                location.reload();
+            } catch (e) {
+                alert("Algo salió mal..." + e);
+            }
+        };
+
+
+
+
+
+
+
+        $(".add-producto").click(function (event) {
+            const productoId = $(this).data('productoid');
+            agregarProducto(productoId)
+
+        });
+
+    </script>
+
+
+
+
+
+
+
 
 </body>
 

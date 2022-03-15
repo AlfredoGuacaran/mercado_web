@@ -1,0 +1,31 @@
+{% macro carrito_detalle(carrito) %}
+
+<div class="modal-body">
+
+    <table class="table">
+        <thead>
+            <th scope="col">Cod. Producto</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Sub total</th>
+        </thead>
+        <tbody>
+
+            {% for producto in carrito %}
+            <tr>
+                <th scope="row">{{producto.id}}</th>
+                <td>{{producto.nombre}}</td>
+                <td>{{1}}</td>
+                <td>{{producto.precio}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+
+</div>
+
+
+{% endmacro %}
