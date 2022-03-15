@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% from 'producto_macro.html' import producto_card %}
+
+{% block container %}
+<h1>Bienvenido, seleccione los productos que desea agregar a su carrito</h1>
+
+<div class="row">
+    {% for producto in productos %}
+    {{ producto_card(producto) }}
+    {% endfor %}
+</div>
+
+{% endblock %}
