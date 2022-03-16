@@ -1,8 +1,8 @@
-{% macro carrito_detalle(carrito) %}
+{% macro carrito_detalle(carrito, total) %}
 
 <div class="modal-body">
 
-    <table class="table">
+    <table class="table py-5">
         <thead>
             <th scope="col">Cod. Producto</th>
             <th scope="col">Descripción</th>
@@ -20,13 +20,7 @@
             </tr>
             {% endfor %}
         </tbody>
-        <tfoot class="d-flex">
 
-            <p>Total:</p>
-            <p>1542201</p>
-
-
-        </tfoot>
     </table>
 
 </div>

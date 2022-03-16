@@ -36,7 +36,11 @@ async function getCarrito(nombre, balance) {
       'SELECT carrito.id, carrito.nombre, COUNT (carrito.id) as cantidad, SUM (carrito.precio) as subtotal FROM carrito GROUP BY carrito.id ,carrito.nombre;'
     );
     client.release();
-    return res.rows;
+    const carrito = res.rows;
+
+    const total = carrito.reduce((acu, prod) => acu + Number(prod.subtotal), 0);
+
+    return { carrito, total };
   } catch (error) {
     console.log(error);
     throw error;

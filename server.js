@@ -23,8 +23,13 @@ nunjucks.configure('views', {
 });
 
 app.get('/', async (req, res) => {
-  const carrito = await getCarrito();
-  res.render('index.html', { productos: productos, carrito: carrito });
+  const { carrito, total } = await getCarrito();
+
+  res.render('index.html', {
+    productos: productos,
+    carrito: carrito,
+    total: total,
+  });
 });
 
 app.post('/agregar', async (req, res) => {
